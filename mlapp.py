@@ -5,11 +5,10 @@ import pickle
 #use the model that was created in DiabetesDetection.ipynb 
 model = pickle.load(open("diabetes_random_forrest_model.pkl", 'rb'))
 
- 
 st.set_page_config(page_title="AI HEALTH TOOLS", page_icon=None)
                    
 #function for getting user input through streamlit app
-def user_input():
+def diabetes_user_input():
    
     pregnancies = st.sidebar.slider("Pregancies",0,10) 
     glucose = st.sidebar.slider("Glucose",0,200) 
@@ -72,32 +71,53 @@ def main():
     #menu item selcction
     
     menu_items= [" ", "Diabetes Predictor", "Pneumonia Predictor",
-                 "COVID-19 Symptom Checker", "Heart Disease Predictor", "Eye Disease Predictor"]
+                 "COVID-19 Predictor", "Heart Disease Predictor", "Eye Disease Predictor"]
     
-    choice = st.sidebar.selectbox("MENU", menu_items)
-    
+    choice = st.sidebar.selectbox("MENU", menu_items)   
     
     if choice == "Diabetes Predictor":
         
         # PATIENT DATA
         st.subheader('DIABETES PREDICTOR')
         st.write("User Input:")
-        user_data = user_input()
+        user_data = diabetes_user_input()
         st.write(user_data)
-             
-        #ML function called and result determined and displayed
+            
+       #ML function called and result determined and displayed
         if st.button("Predict"): 
             pred=predict_diabetes(user_data)
         
             if pred == 1:
-                #Patient is Diabetic - write html code with patient is diabetic
                 st.markdown(diabetic_html, unsafe_allow_html = True)
+                st.write(" ")
                 #st.write("Prediction Probability:", model.predict_proba(user_data))
         
             else:
-                #Patient is Diabetic - write html code with patient is not diabetic
                 st.markdown(not_diabetic_html, unsafe_allow_html = True)
+                st.write(" ")
                 #st.write("Prediction Probability:", model.predict_proba(user_data))
+    
+    elif choice == "Pneumonia Predictor":
+        
+        # PATIENT DATA
+        st.subheader('PNEUMONIA PREDICTOR')
+        
+    elif choice == "COVID-19 Predictor":
+        
+        # PATIENT DATA
+        st.subheader('COVID-19 PREDICTOR')
+        
+    elif choice == "Heart Disease Predictor":
+        
+        # PATIENT DATA
+        st.subheader('HEART DISEASE PREDICTOR')
+        
+    elif choice == "Eye Disease Predictor":
+        
+        # PATIENT DATA
+        st.subheader('EYE DISEASE PREDICTOR')
+      
+    
             
    
     
