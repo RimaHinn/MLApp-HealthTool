@@ -79,6 +79,7 @@ def main():
         
         # PATIENT DATA
         st.subheader('DIABETES PREDICTOR')
+        st.image('data/Features.png', width= 300)
         st.write("User Input:")
         user_data = diabetes_user_input()
         st.write(user_data)
